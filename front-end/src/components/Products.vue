@@ -21,12 +21,11 @@
           
       </div>
       <div class="searchBtn">
-        <select id="cars" @change="onChange($event)">
+        <select id="cars" v-model="searchType" @change="onChange($event)">
           <option value="title">Title</option>
           <option value="ISBN">ISBN</option>
           <option value="author">Author</option>
           <option value="Publisher">Publisher</option>
-          <option value="audi" selected disabled>Search type</option>
         </select>
         <b-button variant="primary" @click="search" class="btn  btn-lg btn-full "> Search </b-button>
       </div>
@@ -68,6 +67,7 @@ export default {
   data() {
     return{
         searchValue:'',
+        searchType: 'ISBN',
         products:[],
     }
   },
@@ -87,7 +87,7 @@ export default {
   methods: {
       onChange(e) {
               console.log(e.target.value);
-          },
+      },
     filter(){
        this.filtered = this.filteredList ;
        console.log(this.filtered);
@@ -108,8 +108,8 @@ export default {
             throw resp;
         });
     },
-    test(){
-        console.log(this.categoryName);
+    search(){
+        // search request
     },
     view(product){
       if(this.isAdmin){

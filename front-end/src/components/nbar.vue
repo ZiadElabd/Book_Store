@@ -2,23 +2,20 @@
   <nav class="navbar navbar-dark bg-primary navbar navbar-expand-lg">
      <div class="container">
        <ul class="categories navbar-nav  mr-auto">
-          <li @click="getProductsEvent('Clothing')" class="category_item">
-            Clothing
+          <li @click="getProductsEvent('Science')" class="category_item">
+            Science
           </li>
-          <li @click="getProductsEvent('Electronics')" class="category_item">
-            Electronics
+          <li @click="getProductsEvent('Art')" class="category_item">
+            Art
           </li>
-          <li @click="getProductsEvent('Shoes')" class="category_item">
-            Shoes
+          <li @click="getProductsEvent('Religion')" class="category_item">
+            Religion
           </li>
-          <li @click="getProductsEvent('Watches')" class="category_item">
-            Watches
+          <li @click="getProductsEvent('History')" class="category_item">
+            History
           </li>
-          <li @click="getProductsEvent('Jewallery')" class="category_item">
-            Jewallery
-          </li>
-          <li @click="getProductsEvent('Sports')" class="category_item">
-            Sports
+          <li @click="getProductsEvent('Geography')" class="category_item">
+            Geography
           </li>
           
         </ul>

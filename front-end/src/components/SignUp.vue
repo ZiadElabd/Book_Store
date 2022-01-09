@@ -19,6 +19,11 @@
                 <input type="email"  v-model="user.userName" class="form-control form-control-lg" placeholder="Username" />
             </div>
 
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="text"  v-model="user.email" class="form-control form-control-lg" placeholder="E-mail" />
+            </div>
+
 
             <div class="form-group">
                 <label>Password</label>
@@ -30,12 +35,8 @@
                 <input type="password"  v-model="confirmPassword" class="form-control form-control-lg shadow-none" placeholder="confirm Password" />
             </div>
             <div class="form-group">
-                <label>Address</label>
-                <input type="text"  v-model="user.address" class="form-control form-control-lg" placeholder="Address" />
-            </div>
-             <div class="form-group">
-                <label>Phone</label>
-                <input type="text"  v-model="user.phone" class="form-control form-control-lg" placeholder="Phone number" />
+                <label>Shipping Address</label>
+                <input type="text"  v-model="user.address" class="form-control form-control-lg" placeholder="Enter your Shipping Address" />
             </div>
 
             <div class="form-group ">
@@ -58,7 +59,7 @@
                     lastName:'',
                     userName:'',
                     password:'',
-                    phone:'',
+                    email:'',
                     address:'',
                 },
             }
