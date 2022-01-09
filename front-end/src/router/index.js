@@ -10,6 +10,8 @@ import Products from '../components/Products.vue'
 import displayProduct from '../components/displayProduct.vue'
 import newProduct from '../components/newProduct.vue'
 import Cart from '../views/Cart.vue'
+import Orders from '../views/Orders.vue'
+import newOrder from '../views/newOrder.vue'
 
 
 
@@ -26,6 +28,16 @@ const routes = [
         path: '/Products',
         name: 'Products',
         component: Products
+    },
+    {
+        path: '/newOrder',
+        name: 'newOrder',
+        component: newOrder
+    },
+    {
+        path: '/Orders',
+        name: 'Orders',
+        component: Orders
     },
     {
         path: '/Cart',
