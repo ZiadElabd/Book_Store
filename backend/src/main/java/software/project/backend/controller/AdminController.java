@@ -3,7 +3,7 @@ package software.project.backend.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import software.project.backend.Model.Product;
+import software.project.backend.Model.Book;
 import software.project.backend.Model.User;
 import software.project.backend.sercuirty.Singelton;
 import software.project.backend.service.adminService;
@@ -40,16 +40,16 @@ public class AdminController {
         return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
     }
     @GetMapping("/getProducts/{categroyName}/{ID}")
-    public ResponseEntity<List<Product>> getProductsByCategroy(@PathVariable("categroyName") String categroyName,
-                                                               @PathVariable("ID") String seesionID){
-        List<Product> ProductsByCategroy=service.getAllProductByCategroy(seesionID,categroyName);
+    public ResponseEntity<List<Book>> getProductsByCategroy(@PathVariable("categroyName") String categroyName,
+                                                            @PathVariable("ID") String seesionID){
+        List<Book> ProductsByCategroy=service.getAllProductByCategroy(seesionID,categroyName);
         if (ProductsByCategroy!=null) return  new ResponseEntity<>(ProductsByCategroy, HttpStatus.ACCEPTED);
         return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }
     @GetMapping("/getProduct/{productID}/{ID}")
-    public ResponseEntity<Product> getProduct(@PathVariable("productID") int productID,
+    public ResponseEntity<Book> getProduct(@PathVariable("productID") int productID,
                                               @PathVariable("ID") String seesionID){
-        Product result=service.getProductByID(seesionID,productID);
+        Book result=service.getProductByID(seesionID,productID);
         if (result!=null) return  new ResponseEntity<>(result, HttpStatus.ACCEPTED);
         return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }

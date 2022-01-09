@@ -31,10 +31,8 @@ public class userBuilder implements Ibuilder {
        private void buildAddress(String Address) {
         this.user.setAddress(Address);
        }
+      private void buildEmail(String email){this.user.setEmail(email);}
 
-       private void buildPhone(String phone) {
-        this.user.setPhone(phone);
-       }
        private void buildRole(int role){this.user.setRole(role);}
 
        @Override
@@ -47,7 +45,7 @@ public class userBuilder implements Ibuilder {
          buildLastName(obj.getString("lastName"));
          buildPassword(obj.getString("password"));
          buildAddress(obj.getString("address"));
-         buildPhone(obj.getString("phone"));
+         buildEmail(obj.getString("email"));
          buildRole(0);
         } catch (JSONException e) {
          System.out.println("user problem");
