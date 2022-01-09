@@ -7,7 +7,7 @@ public class User implements Imodel{
 	private String lastName;
 	private String password;
 	private String address;
-	private String phone;
+	private String email;
 	private int role;
 	
 	public User()
@@ -57,12 +57,12 @@ public class User implements Imodel{
 		this.password = pass;
 	}
 	
-	public String getPhone() {
-		return this.phone;
+	public String getEmail() {
+		return this.email;
 	}
 
-	public void setPhone(String p) {
-		this.phone = p;
+	public void setEmail(String p) {
+		this.email = p;
 	}
 	
 	public String getAddress() {

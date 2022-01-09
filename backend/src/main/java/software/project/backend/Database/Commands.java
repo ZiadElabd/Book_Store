@@ -4,12 +4,12 @@ public class Commands {
 
     public static String INSERT_USER(){
         return "INSERT INTO USER " +
-                "(userName, password, firstName, lastName, Address, Phone, role) " +
+                "(userName, password, firstName, lastName, address, email, role) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
     }
 
     public static String UPDATE_USER_SETTINGS(){
-        return "UPDATE USER SET firstName = ?, lastName = ?, Address = ?, Phone = ? " +
+        return "UPDATE USER SET firstName = ?, lastName = ?, address = ?, email = ? " +
                 " WHERE userName = ? ";
     }
 
@@ -44,33 +44,33 @@ public class Commands {
     }
 
     public static String INSERT_PRODUCT(){
-        return "INSERT INTO PRODUCT " +
-                "(categoryName, name, description, price, quantity, discount, image) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        return "INSERT INTO BOOK " +
+                "(ISBN,title, noOfCopies, price, publicationYear, threshold, categoryId, publisherId,image) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?)";
     }
 
     public static String UPDATE_PRODUCT(){
-        return "UPDATE PRODUCT " +
-                "SET CategoryName = ?, name = ?, description = ?, price = ?, quantity = ?, discount = ?, image = ?" +
-                "WHERE productId = ?";
+        return "UPDATE BOOK " +
+                "SET ISBN = ?, title = ?, noOfCopies = ?, price = ?, publicationYear = ?, threshold = ?, categoryId = ? ,publisherId=? , image" +
+                "WHERE ISBN = ?";
     }
 
 
     public static String GET_PRODUCT_BY_ID(){
-        return "SELECT * FROM PRODUCT WHERE productId = ?" ;
+        return "SELECT * FROM BOOK WHERE ISBN = ?" ;
     }
 
     public static String GET_PRODUCTS_BY_CATEGORY(){
-        return "SELECT * FROM PRODUCT where CategoryName = ?" ;
+        return "SELECT * FROM PROBOOKDUCT where categoryId = ?" ;
     }
 
     public static String GET_ALL_PRODUCTS(){
-        return "SELECT * FROM PRODUCT" ;
+        return "SELECT * FROM BOOK" ;
     }
 
     public static String DELETE_PRODUCT(){
-        return "DELETE FROM PRODUCT " +
-                "WHERE productId = ?";
+        return "DELETE FROM BOOK " +
+                "WHERE ISBN = ?";
     }
 
 }

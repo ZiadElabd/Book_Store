@@ -3,27 +3,29 @@ package software.project.backend.Database;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import software.project.backend.Model.Product;
+import software.project.backend.Model.Book;
 
 import java.util.List;
 
-public class ProductDAO {
+public class BookDAO {
 
 	private JdbcTemplate jdbcTemplate = new JdbcTemplate(Source.getDataSource());
 
-	public ProductDAO() {
+	public BookDAO() {
 
 	}
 
-	public boolean insertProduct(Product p) {
+	public boolean insertProduct(Book p) {
 
 		int result = jdbcTemplate.update(Commands.INSERT_PRODUCT(),
-				p.getCategoryName(),
-				p.getName(),
-				p.getDescription(),
+				p.getISBN(),
+				p.getTitle(),
+				p.getNoOfCopies(),
 				p.getPrice() ,
-				p.getQuantity(),
-				p.getDiscount(),
+				p.getPublicationYear(),
+				p.getThreshold(),
+				p.getCategoryId(),
+				p.getPublisherId(),
 				p.getImage());
 
 		if (result > 0) {
@@ -33,15 +35,17 @@ public class ProductDAO {
 		return false ;
 	}
 
-	public boolean updateProduct(Product p, int productId) {
+	public boolean updateProduct(Book p, int productId) {
 
 		int result = jdbcTemplate.update(Commands.UPDATE_PRODUCT(),
-				p.getCategoryName(),
-				p.getName(),
-				p.getDescription(),
+				p.getISBN(),
+				p.getTitle(),
+				p.getNoOfCopies(),
 				p.getPrice() ,
-				p.getQuantity(),
-				p.getDiscount(),
+				p.getPublicationYear(),
+				p.getThreshold(),
+				p.getCategoryId(),
+				p.getPublisherId(),
 				p.getImage(),
 				productId);
 		if (result > 0) {
@@ -51,22 +55,22 @@ public class ProductDAO {
 		return false ;
 	}
 
-	public Product getProductByID(int ID) {
-		Product product = (Product) jdbcTemplate.queryForObject(Commands.GET_PRODUCT_BY_ID(),
-				new BeanPropertyRowMapper(Product.class), ID);
+	public Book getProductByID(int ID) {
+		Book product = (Book) jdbcTemplate.queryForObject(Commands.GET_PRODUCT_BY_ID(),
+				new BeanPropertyRowMapper(Book.class), ID);
 		return product;
 	}
 
-	public List<Product> getProductByCategory(String categoryName) {
-		List<Product> products = jdbcTemplate.query(Commands.GET_PRODUCTS_BY_CATEGORY(),
-				new BeanPropertyRowMapper(Product.class),
+	public List<Book> getProductByCategory(String categoryName) {
+		List<Book> products = jdbcTemplate.query(Commands.GET_PRODUCTS_BY_CATEGORY(),
+				new BeanPropertyRowMapper(Book.class),
 				categoryName);
 		return products;
 	}
 
-	public List<Product> getAllProduct() {
-		List<Product> products = jdbcTemplate.query(Commands.GET_ALL_PRODUCTS(),
-				new BeanPropertyRowMapper(Product.class));
+	public List<Book> getAllProduct() {
+		List<Book> products = jdbcTemplate.query(Commands.GET_ALL_PRODUCTS(),
+				new BeanPropertyRowMapper(Book.class));
 		return products;
 	}
 
