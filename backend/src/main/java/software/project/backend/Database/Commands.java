@@ -61,7 +61,7 @@ public class Commands {
     }
 
     public static String GET_PRODUCTS_BY_CATEGORY(){
-        return "SELECT * FROM PROBOOKDUCT where categoryId = ?" ;
+        return "SELECT * FROM BOOK where categoryId = ?" ;
     }
 
     public static String GET_ALL_PRODUCTS(){

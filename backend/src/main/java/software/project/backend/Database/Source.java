@@ -17,9 +17,9 @@ public class Source {
         if (source == null){
             source = DataSourceBuilder
                     .create()
-                    .username("sql4460814")
-                    .password("Ruwqt9etyE")
-                    .url("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql4460814")
+                    .username("root")
+                    .password("root")
+                    .url("jdbc:mysql://localhost:3306/online_store")
                     .driverClassName("com.mysql.cj.jdbc.Driver")
                     .build();
         }
