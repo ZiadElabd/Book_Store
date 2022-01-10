@@ -59,6 +59,7 @@ export default {
             body: JSON.stringify(this.order)
           }
         );
+        this.$router.push({ name: "Orders" });
     }
   }
 }

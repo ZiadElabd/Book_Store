@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import Navbar from "../components/nbar.vue";
 export default {
   name: "Orders",
@@ -81,7 +82,12 @@ export default {
       }
     },
     deleteOrder(orderId){
-      this.orders = this.orders.filter(item => item.orderId !== orderId);
+      let v = [];
+      for(order in this.orders){
+        if(item.orderId !== orderId)
+          v.push(order);
+      }
+      this.orders = v;
       try {
           fetch( "http://localhost:8080/admin/deleteOrder/" + this.userID + '/' + orderId, {
               method: "delete", 
