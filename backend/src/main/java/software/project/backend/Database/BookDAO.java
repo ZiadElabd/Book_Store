@@ -44,8 +44,8 @@ public class BookDAO {
 				p.getPrice() ,
 				p.getPublicationYear(),
 				p.getThreshold(),
-				p.getCategoryId(),
-				p.getPublisherId(),
+				p.getCategoryName(),
+				p.getPublisherName(),
 				p.getImage(),
 				productId);
 		if (result > 0) {

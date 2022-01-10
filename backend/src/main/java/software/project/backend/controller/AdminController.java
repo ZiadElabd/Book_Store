@@ -47,7 +47,7 @@ public class AdminController {
         return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }
     @GetMapping("/getProduct/{productID}/{ID}")
-    public ResponseEntity<Book> getProduct(@PathVariable("productID") int productID,
+    public ResponseEntity<Book> getProduct(@PathVariable("productID") String productID,
                                               @PathVariable("ID") String seesionID){
         Book result=service.getProductByID(seesionID,productID);
         if (result!=null) return  new ResponseEntity<>(result, HttpStatus.ACCEPTED);

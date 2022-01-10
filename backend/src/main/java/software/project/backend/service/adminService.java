@@ -43,7 +43,7 @@ public class adminService {
         if (userName==null) return null;
         return productOperation.getProductByCategory(categroy);
     }
-    public Book getProductByID(String sessionID,int productID){
+    public Book getProductByID(String sessionID,String productID){
         String userName=trackingSystem.checkAcess(sessionID);
         if (userName==null) return null;
         return productOperation.getProductByID(productID);
