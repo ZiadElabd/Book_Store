@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import software.project.backend.Model.Book;
+import software.project.backend.Model.builder.order;
 
 import java.util.List;
 
@@ -74,9 +75,9 @@ public class BookDAO {
 		return products;
 	}
 	
-	public List<Book> getAllOrders() {
-		List<Book> products = jdbcTemplate.query(Commands.allOrders(),
-				new BeanPropertyRowMapper(Book.class));
+	public List<order> getAllOrders() {
+		List<order> products = jdbcTemplate.query(Commands.allOrders(),
+				new BeanPropertyRowMapper(order.class));
 		return products;
 	}
 	
@@ -92,9 +93,9 @@ public class BookDAO {
 		return false ;
 	}
 	
-	public boolean deleteOrder(int productId) {
+	public boolean deleteOrder(int orderID) {
 
-		int result = jdbcTemplate.update(Commands.deleteOrder(), productId);
+		int result = jdbcTemplate.update(Commands.deleteOrder(), orderID);
 
 		if (result > 0) {
 			System.out.println("A new has been deleted");
