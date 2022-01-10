@@ -29,7 +29,7 @@
             <template #button-content>
                   <em><font-awesome-icon icon="cog" /></em>
             </template>
-                <b-dropdown-item to="/Orders">Orders</b-dropdown-item>
+                <b-dropdown-item v-if="isAdmin" to="/Orders">Orders</b-dropdown-item>
                 <b-dropdown-item to="/Settings">Settings</b-dropdown-item>
                 <b-dropdown-item to="/">Log Out</b-dropdown-item>
           </b-dropdown>
