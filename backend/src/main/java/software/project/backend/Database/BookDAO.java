@@ -55,7 +55,7 @@ public class BookDAO {
 		return false ;
 	}
 
-	public Book getProductByID(int ID) {
+	public Book getProductByID(String ID) {
 		Book product = (Book) jdbcTemplate.queryForObject(Commands.GET_PRODUCT_BY_ID(),
 				new BeanPropertyRowMapper(Book.class), ID);
 		return product;
