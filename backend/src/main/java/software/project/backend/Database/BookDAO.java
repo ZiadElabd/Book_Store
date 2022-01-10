@@ -24,8 +24,8 @@ public class BookDAO {
 				p.getPrice() ,
 				p.getPublicationYear(),
 				p.getThreshold(),
-				p.getCategoryId(),
-				p.getPublisherId(),
+				p.getCategoryName(),
+				p.getPublisherName(),
 				p.getImage());
 
 		if (result > 0) {
@@ -55,7 +55,7 @@ public class BookDAO {
 		return false ;
 	}
 
-	public Book getProductByID(int ID) {
+	public Book getProductByID(String ID) {
 		Book product = (Book) jdbcTemplate.queryForObject(Commands.GET_PRODUCT_BY_ID(),
 				new BeanPropertyRowMapper(Book.class), ID);
 		return product;
