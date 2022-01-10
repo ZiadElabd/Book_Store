@@ -82,14 +82,62 @@
 <script>
 import Navbar from "../components/nbar.vue";
 export default {
-    date(){
-    },
-     components: {
+  date(){
+    return{
+      products:[],
+    }
+  },
+  components: {
     Navbar,
   },
   mounted:{
     
-}
+  },
+  computed: {
+        isAdmin(){
+            return this.$store.state.role;
+        },
+        product(){
+            return this.$route.params.product;
+        },
+        userID(){
+            return this.$store.state.userID;
+        }
+    },
+  methods:{
+    parseJSON: function (resp) {
+        return resp.json();
+    },
+    checkStatus: function (resp) {
+        console.log('status');
+        console.log(resp);
+        if (resp.status >= 200 && resp.status < 300) {
+            console.log('good status');
+            return resp;
+        }
+        console.log('bad status');
+        return this.parseJSON(resp).then((resp) => {
+            throw resp;
+        });
+    },
+    async getProducts(category){
+      this.products = [];
+      try {
+          let response = await fetch( "http://localhost:8080/user/getCart/" + this.userID , {
+              method: "get", 
+          }).then(this.checkStatus)
+          .then(this.parseJSON);
+          console.log(response);
+          this.products = response;
+          console.log(this.products);
+      } catch (error) {
+          alert('error');
+      }
+    }
+  },
+  created() {
+
+  },
 }
 </script>
 <style scoped>

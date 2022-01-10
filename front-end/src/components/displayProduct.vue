@@ -42,6 +42,9 @@ export default {
         },
         product(){
             return this.$route.params.product;
+        },
+        userID(){
+            return this.$store.state.userID;
         }
     },
     methods: {
@@ -67,8 +70,8 @@ export default {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    isbn:this.product.isbn,
-                    noOfCopies:this.product.noOfCopies
+                    isbn: this.product.isbn,
+                    noOfCopies: this.product.noOfCopies
                 })
             });
             alert('The book is added to cart');
