@@ -134,7 +134,7 @@ public class Commands {
         return "SELECT * FROM BOOK WHERE ISBN = ?";
     }
     public static String incrementQuantity() {
-        return "UPDATE CheckOut SET noOfCopies = ? WHERE ISBN = ? AND userName = ?" ;
+        return "UPDATE CheckOut SET noOfCopies = ? , date = ? WHERE ISBN = ? AND userName = ?" ;
     }
 
     public static String GET_PRODUCTS_BY_CATEGORY() {

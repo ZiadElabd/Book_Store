@@ -110,9 +110,9 @@ public class BookDAO {
 		return jdbcTemplate.query(Commands.getCart(), new BeanPropertyRowMapper(Book.class), userName);
 	}
 	
-	public boolean updateQuantityInCart(String u , String isbn , int v) {
+	public boolean updateQuantityInCart(String u , String isbn , int v, String d) {
 
-		int result = jdbcTemplate.update(Commands.incrementQuantity(),v,isbn,u);
+		int result = jdbcTemplate.update(Commands.incrementQuantity(),v,d,isbn,u);
 		if (result > 0) {
 			System.out.println("A new row has been updated.");
 			return true;
