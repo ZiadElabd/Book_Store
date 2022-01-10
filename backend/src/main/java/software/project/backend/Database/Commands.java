@@ -133,9 +133,12 @@ public class Commands {
     public static String GET_PRODUCT_BY_ID() {
         return "SELECT * FROM BOOK WHERE ISBN = ?";
     }
+    public static String incrementQuantity() {
+        return "UPDATE CheckOut SET noOfCopies = ? WHERE ISBN = ? AND userName = ?" ;
+    }
 
     public static String GET_PRODUCTS_BY_CATEGORY() {
-        return "SELECT * FROM BOOK where categoryName = ?";
+        return "UPDATE * FROM BOOK where categoryName = ?";
     }
 
     public static String GET_ALL_PRODUCTS() {
