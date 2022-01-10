@@ -138,7 +138,7 @@ export default {
     bus.$on('changeCategory', (data) => {
       this.getProducts(data);
     })
-    this.getProducts('Clothing');
+    this.getProducts('Science');
   },
   
 };

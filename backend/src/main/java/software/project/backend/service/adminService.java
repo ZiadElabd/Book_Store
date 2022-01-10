@@ -3,11 +3,13 @@ package software.project.backend.service;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import software.project.backend.Database.BookDAO;
 import software.project.backend.Database.UserDAO;
 import software.project.backend.Model.Book;
 import software.project.backend.Model.User;
 import software.project.backend.Model.builder.Director;
+import software.project.backend.Model.builder.order;
 import software.project.backend.sercuirty.Singelton;
 import software.project.backend.sercuirty.passwordOperations;
 
@@ -30,7 +32,7 @@ public class adminService {
         String userName=trackingSystem.checkAcess(sessionID);
         if (userName==null) return false;
         Book product=(Book) director.composeModel("book",dataSent);
-        return productOperation.updateProduct(product,productID);
+        return productOperation.updateProduct(product);
     }
     public boolean deleteProduct(String sessionID,String productID){
         String userName=trackingSystem.checkAcess(sessionID);
@@ -94,6 +96,21 @@ public class adminService {
         }
         if(userOperation.checkSignIn(userName,oldPassword)==null) return false;
         return userOperation.changePassword(userName,newPassword);
+    }
+    public boolean insertOrder(String sessionID,String dataSent){
+
+        order n=new order(dataSent);
+        return productOperation.insertOrder(n.getIsbn(),n.getNoOfCopies());
+    }
+    public boolean deleteOrder(String sessionID,int orderID){
+        String userName=trackingSystem.checkAcess(sessionID);
+        if (userName==null) return false;
+        return productOperation.deleteOrder(orderID);
+    }
+    public List<order> getAllOrder(String sessionID) {
+        String userName=trackingSystem.checkAcess(sessionID);
+        if (userName==null) return null;
+        return productOperation.getAllOrders();
     }
 
 

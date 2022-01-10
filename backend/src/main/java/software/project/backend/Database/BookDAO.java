@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import software.project.backend.Model.Book;
+import software.project.backend.Model.builder.order;
 
 import java.util.List;
 
@@ -59,10 +60,9 @@ public class BookDAO {
 		return res;
 	}
 
-	public boolean updateProduct(Book p, int productId) {
+	public boolean updateProduct(Book p) {
 
 		int result = jdbcTemplate.update(Commands.UPDATE_PRODUCT(),
-				p.getIsbn(),
 				p.getTitle(),
 				p.getNoOfCopies(),
 				p.getPrice(),
@@ -71,7 +71,7 @@ public class BookDAO {
 				p.getCategoryName(),
 				p.getPublisherName(),
 				p.getImage(),
-				productId);
+				p.getIsbn());
 		if (result > 0) {
 			System.out.println("A new row has been updated.");
 			return true;
@@ -111,10 +111,10 @@ public class BookDAO {
 				new BeanPropertyRowMapper(Book.class));
 		return products;
 	}
-
-	public List<Book> getAllOrders() {
-		List<Book> products = jdbcTemplate.query(Commands.allOrders(),
-				new BeanPropertyRowMapper(Book.class));
+	
+	public List<order> getAllOrders() {
+		List<order> products = jdbcTemplate.query(Commands.allOrders(),
+				new BeanPropertyRowMapper(order.class));
 		return products;
 	}
 
@@ -129,10 +129,10 @@ public class BookDAO {
 		}
 		return false;
 	}
+	
+	public boolean deleteOrder(int orderID) {
 
-	public boolean deleteOrder(int productId) {
-
-		int result = jdbcTemplate.update(Commands.deleteOrder(), productId);
+		int result = jdbcTemplate.update(Commands.deleteOrder(), orderID);
 
 		if (result > 0) {
 			System.out.println("A new has been deleted");

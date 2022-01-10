@@ -7,16 +7,14 @@ public class order {
     private  int orderID;
     private int noOfCopies;
     private String isbn;
-    public order compose(String sentData){
-        order n=new order();
+    public order(String sentData){
         try {
             JSONObject obj = new JSONObject(sentData);
-            n.setIsbn(obj.getString("isbn"));
-            n.setNoOfCopies(obj.getInt("noOfCopies"));
+            this.setIsbn(obj.getString("isbn"));
+            this.setNoOfCopies(obj.getInt("noOfCopies"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-     return n;
     }
     public int getOrderID() {
         return orderID;

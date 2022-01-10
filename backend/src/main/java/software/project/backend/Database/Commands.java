@@ -108,7 +108,7 @@ public class Commands {
 
     public static String UPDATE_PRODUCT() {
         return "UPDATE BOOK " +
-                "SET ISBN = ?, title = ?, noOfCopies = ?, price = ?, publicationYear = ?, threshold = ?, categoryId = ? ,publisherId=? , image"
+                "SET title = ?, noOfCopies = ?, price = ?, publicationYear = ?, threshold = ?, categoryName = ? ,publisherName=? , image=?"
                 +
                 "WHERE ISBN = ?";
     }

@@ -163,7 +163,7 @@ export default {
       console.log("updating product");
       fetch(
         "http://localhost:8080/admin/updateProduct/" +
-          this.product.productId + '/' + 
+          this.product.isbn + '/' + 
           this.userID,
         {
           method: "put",
