@@ -33,6 +33,18 @@
               disabled
             />
           </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Phone"
+              v-model="allSettings.email"
+              disabled
+            />
+          </div>
+
           <div class="mb-3">
             <label for="address" class="form-label">Address</label>
             <input
@@ -40,17 +52,6 @@
               class="form-control"
               id="address"
               v-model="allSettings.address"
-            />
-          </div>
-
-
-          <div class="mb-3">
-            <label for="Phone" class="form-label">Phone</label>
-            <input
-              type="text"
-              class="form-control"
-              id="Phone"
-              v-model="allSettings.phone"
             />
           </div>
 
@@ -102,7 +103,7 @@ export default {
         firstName:"",
         lastName:"", 
         address: "",
-        phone: "",
+        email: "",
         userName: ""
       },
       admins: [],

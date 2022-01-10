@@ -18,7 +18,7 @@ public class Source {
             source = DataSourceBuilder
                     .create()
                     .username("root")
-                    .password("root")
+                    .password("password")
                     .url("jdbc:mysql://localhost:3306/online_store")
                     .driverClassName("com.mysql.cj.jdbc.Driver")
                     .build();
