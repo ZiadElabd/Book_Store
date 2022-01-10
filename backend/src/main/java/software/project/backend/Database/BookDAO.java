@@ -37,6 +37,10 @@ public class BookDAO {
 		return false;
 	}
 
+	public void updateCart(String userName, String ISBN, int newCopies) {
+		jdbcTemplate.update(Commands.updateCart(), userName, ISBN, newCopies);
+	}
+
 	public boolean isInCart(String userName, String ISBN) {
 		try {
 			Integer n = jdbcTemplate.queryForObject(Commands.isInCart(),

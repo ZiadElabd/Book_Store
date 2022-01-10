@@ -16,8 +16,12 @@ public class Commands {
         return "INSERT INTO CheckOut (userName ,ISBN , noOfCopies,date) VALUES (?,?,?,?)";
     }
 
-    public static String isInCart(){
-        return "SELECT Count(*) FROM CheckOut AS C WHERE C.userName = ? AND C.ISBN = ? "; 
+    public static String isInCart() {
+        return "SELECT Count(*) FROM CheckOut AS C WHERE C.userName = ? AND C.ISBN = ? ";
+    }
+
+    public static String updateCart() {
+        return "UPDATE CheckOut AS C SET C.noOfCopies = ?  WHERE C.userName = ? AND C.ISBN = ? ";
     }
 
     public static String Search(String searchText, String type) {
