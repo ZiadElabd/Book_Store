@@ -12,24 +12,40 @@
                 <label class="product-line-price">Total</label>
             </div>
 
-            <div class="product" v-for="product in products" :key="product.isbn" >
+            <div class="product">
                 <div class="product-image">
-                <img  :src="product.image">
+                <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
                 </div>
                 <div class="product-details">
-                <div class="product-title">{{product.title}}</div>
-                  <div>ISBN: {{product.isbn}}$</div>     
-                  <div>Category Name: {{product.categoryName}}$</div>  
-                  <div>Publisher: {{product.publisherName}}$</div> 
-                  <div>Publication Year: {{product.publicationYear}}$</div>
+                <div class="product-title">Dingo Dog Bones</div>
+                <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
                 </div>
-                <div class="product-price">{{product.price}}</div>
+                <div class="product-price">12.99</div>
                 <div class="product-quantity">
-                <input type="number" v-model="product.noOfCopies" @change="incrementQuantity(product)" min="1">
+                <input type="number" value="2" min="1">
                 </div>
-                
                 <div class="product-removal">
-                <button @click="deleteFromCart(product)" class="remove-product">
+                <button class="remove-product">
+                    Remove
+                </button>
+                </div>
+                <div class="product-line-price">25.98</div>
+            </div>
+
+            <div class="product">
+                <div class="product-image">
+                <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
+                </div>
+                <div class="product-details">
+                <div class="product-title">Dingo Dog Bones</div>
+                <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
+                </div>
+                <div class="product-price">12.99</div>
+                <div class="product-quantity">
+                <input type="number" value="2" min="1">
+                </div>
+                <div class="product-removal">
+                <button class="remove-product">
                     Remove
                 </button>
                 </div>
@@ -66,84 +82,14 @@
 <script>
 import Navbar from "../components/nbar.vue";
 export default {
-  date(){
-    return{
-      products:[],
-    }
-  },
-  components: {
+    date(){
+    },
+     components: {
     Navbar,
   },
   mounted:{
     
-  },
-  computed: {
-        isAdmin(){
-            return this.$store.state.role;
-        },
-        product(){
-            return this.$route.params.product;
-        },
-        userID(){
-            return this.$store.state.userID;
-        }
-    },
-  methods:{
-    parseJSON: function (resp) {
-        return resp.json();
-    },
-    checkStatus: function (resp) {
-        console.log('status');
-        console.log(resp);
-        if (resp.status >= 200 && resp.status < 300) {
-            console.log('good status');
-            return resp;
-        }
-        console.log('bad status');
-        return this.parseJSON(resp).then((resp) => {
-            throw resp;
-        });
-    },
-    async deleteFromCart(product){
-      try {
-          fetch( "http://localhost:8080/user/deleteFromCart/" + this.userID + '/' + product.isbn, {
-              method: "delete", 
-          })
-      } catch (error) {
-          alert('error');
-      }
-    },
-    async getCart(){
-      this.products = [];
-      try {
-          let response = await fetch( "http://localhost:8080/user/getCart/" + this.userID , {
-              method: "get", 
-          }).then(this.checkStatus)
-          .then(this.parseJSON);
-          console.log(response);
-          this.products = response;
-          console.log(this.products);
-      } catch (error) {
-          alert('error');
-      }
-    },
-    incrementQuantity(product){
-      console.log(product.noOfCopies);
-      fetch(
-        "http://localhost:8080/user/updateCart/" + this.userID,
-        {
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                isbn: this.product.isbn,
-                noOfCopies: product.noOfCopies
-            })
-        });
-    }
-  },
-  created() {
-    this.getCart();
-  },
+}
 }
 </script>
 <style scoped>
