@@ -82,7 +82,7 @@ export default {
     deleteOrder(orderId){
       let v = [];
       for(order in this.orders){
-        if(item.orderId !== orderId)
+        if(order.orderId !== orderId)
           v.push(order);
       }
       this.orders = v;
