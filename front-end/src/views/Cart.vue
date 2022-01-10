@@ -12,12 +12,15 @@
           <label class="product-line-price">Total</label>
         </div>
          <div class="product" v-for="product in products" :key="product.isbn">
-            <div class="product-image"><img  :src="product.image"></div>
-            <div class="product-title">{{product.title}}</div>
-            <div>ISBN: {{product.isbn}}$</div>     
-            <div>Category Name: {{product.categoryName}}$</div>  
-            <div>Publisher: {{product.publisherName}}$</div> 
-            <div>Publication Year: {{product.publicationYear}}$</div>
+            <div class="product-details">
+                <div class="product-title">{{product.title}}</div>
+                <div class="product-image"><img  :src="product.image"></div>
+                <div class="product-title">{{product.title}}</div>
+                <div>ISBN: {{product.isbn}}$</div>     
+                <div>Category Name: {{product.categoryName}}$</div>  
+                <div>Publisher: {{product.publisherName}}$</div> 
+                <div>Publication Year: {{product.publicationYear}}$</div>
+            </div>
          </div>
 
         <div class="totals">
