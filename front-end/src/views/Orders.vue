@@ -19,7 +19,7 @@
                <td>{{order.orderID}}</td>
                <td>{{order.isbn}}</td>
                <td>{{order.noOfCopies}}</td>
-               <td><span @click="deleteOrder(order.orderID)" class="pink">Delete</span></td>
+               <td><span @click="deleteOrder(order.orderID)" class="pink">Delete</span> <span @click="confirm(order.orderID)" class="pink">Confirm</span></td>
            </tr>
       </tbody>
    </table>
