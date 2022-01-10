@@ -1,5 +1,6 @@
 package software.project.backend.Database;
 
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -34,6 +35,22 @@ public class BookDAO {
 			return true;
 		}
 		return false;
+	}
+
+	public void updateCart(String userName, String ISBN, int newCopies) {
+		jdbcTemplate.update(Commands.updateCart(), userName, ISBN, newCopies);
+	}
+
+	public boolean isInCart(String userName, String ISBN) {
+		try {
+			Integer n = jdbcTemplate.queryForObject(Commands.isInCart(),
+					Integer.class,
+					userName, ISBN);
+			return (n != null) && (n > 0);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			System.out.println("Exception in checking userName");
+			return false;
+		}
 	}
 
 	public List<Book> searchWithISBN(String ISBN, String cateogry) {
