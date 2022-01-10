@@ -1,96 +1,133 @@
 <template>
-<div>
-     <Navbar />
-  <div class="container">
-       <div class="shopping-cart">
-            <div class="column-labels">
-                <label class="product-image">Image</label>
-                <label class="product-details">Product</label>
-                <label class="product-price">Price</label>
-                <label class="product-quantity">Quantity</label>
-                <label class="product-removal">Remove</label>
-                <label class="product-line-price">Total</label>
-            </div>
+  <div>
+    <Navbar />
+    <div class="container">
+      <div class="shopping-cart">
+        <div class="column-labels">
+          <label class="product-image">Image</label>
+          <label class="product-details">Product</label>
+          <label class="product-price">Price</label>
+          <label class="product-quantity">Quantity</label>
+          <label class="product-removal">Remove</label>
+          <label class="product-line-price">Total</label>
+        </div>
+         <div class="product" v-for="product in products" :key="product.isbn">
+            <div class="product-image"><img  :src="product.image"></div>
+            <div class="product-title">{{product.title}}</div>
+            <div>ISBN: {{product.isbn}}$</div>     
+            <div>Category Name: {{product.categoryName}}$</div>  
+            <div>Publisher: {{product.publisherName}}$</div> 
+            <div>Publication Year: {{product.publicationYear}}$</div>
+         </div>
 
-            <div class="product">
-                <div class="product-image">
-                <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
-                </div>
-                <div class="product-details">
-                <div class="product-title">Dingo Dog Bones</div>
-                <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
-                </div>
-                <div class="product-price">12.99</div>
-                <div class="product-quantity">
-                <input type="number" value="2" min="1">
-                </div>
-                <div class="product-removal">
-                <button class="remove-product">
-                    Remove
-                </button>
-                </div>
-                <div class="product-line-price">25.98</div>
-            </div>
+        <div class="totals">
+          <div class="totals-item">
+            <label>Subtotal</label>
+            <div class="totals-value" id="cart-subtotal">71.97</div>
+          </div>
+          <div class="totals-item">
+            <label>Tax (5%)</label>
+            <div class="totals-value" id="cart-tax">3.60</div>
+          </div>
+          <div class="totals-item">
+            <label>Shipping</label>
+            <div class="totals-value" id="cart-shipping">15.00</div>
+          </div>
+          <div class="totals-item totals-item-total">
+            <label>Grand Total</label>
+            <div class="totals-value" id="cart-total">90.57</div>
+          </div>
+        </div>
 
-            <div class="product">
-                <div class="product-image">
-                <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
-                </div>
-                <div class="product-details">
-                <div class="product-title">Dingo Dog Bones</div>
-                <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
-                </div>
-                <div class="product-price">12.99</div>
-                <div class="product-quantity">
-                <input type="number" value="2" min="1">
-                </div>
-                <div class="product-removal">
-                <button class="remove-product">
-                    Remove
-                </button>
-                </div>
-                <div class="product-line-price">25.98</div>
-            </div>
-
-            
-
-            <div class="totals">
-                <div class="totals-item">
-                <label>Subtotal</label>
-                <div class="totals-value" id="cart-subtotal">71.97</div>
-                </div>
-                <div class="totals-item">
-                <label>Tax (5%)</label>
-                <div class="totals-value" id="cart-tax">3.60</div>
-                </div>
-                <div class="totals-item">
-                <label>Shipping</label>
-                <div class="totals-value" id="cart-shipping">15.00</div>
-                </div>
-                <div class="totals-item totals-item-total">
-                <label>Grand Total</label>
-                <div class="totals-value" id="cart-total">90.57</div>
-                </div>
-            </div>
-                
-                <button class="checkout">Checkout</button>
-
-            </div>
+        <button class="checkout">Checkout</button>
+      </div>
+    </div>
   </div>
-</div>
 </template>
 <script>
-import Navbar from "../components/nbar.vue";
 export default {
-    date(){
-    },
-     components: {
-    Navbar,
+  data() {
+    return{
+        products:[]
+    }
   },
-  mounted:{
-    
-}
-}
+  mounted: {},
+  computed: {
+    isAdmin() {
+      return this.$store.state.role;
+    },
+    product() {
+      return this.$route.params.product;
+    },
+    userID() {
+      return this.$store.state.userID;
+    },
+  },
+  methods: {
+    parseJSON: function (resp) {
+      return resp.json();
+    },
+    checkStatus: function (resp) {
+      console.log("status");
+      console.log(resp);
+      if (resp.status >= 200 && resp.status < 300) {
+        console.log("good status");
+        return resp;
+      }
+      console.log("bad status");
+      return this.parseJSON(resp).then((resp) => {
+        throw resp;
+      });
+    },
+    async deleteFromCart(product) {
+      try {
+        fetch(
+          "http://localhost:8080/user/deleteFromCart/" +
+            this.userID +
+            "/" +
+            product.isbn,
+          {
+            method: "delete",
+          }
+        );
+      } catch (error) {
+        alert("error");
+      }
+    },
+    async getCart() {
+      try {
+        let response = await fetch(
+          "http://localhost:8080/user/getCart/" + this.userID,
+          {
+            method: "get",
+          }
+        )
+          .then(this.checkStatus)
+          .then(this.parseJSON);
+        console.log(response);
+        this.products = response;
+        console.log(this.products);
+      } catch (error) {
+        alert("error");
+      }
+    },
+    incrementQuantity(product) {
+      console.log(product.noOfCopies);
+      fetch("http://localhost:8080/user/updateCart/" + this.userID, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          isbn: this.product.isbn,
+          noOfCopies: product.noOfCopies,
+        }),
+      });
+    },
+  },
+  created() {
+    this.getCart();
+  },
+};
+
 </script>
 <style scoped>
 .product-image {
@@ -125,36 +162,51 @@ export default {
 }
 
 /* This is used as the traditional .clearfix class */
-.group:before, .shopping-cart:before, .column-labels:before, .product:before, .totals-item:before,
+.group:before,
+.shopping-cart:before,
+.column-labels:before,
+.product:before,
+.totals-item:before,
 .group:after,
 .shopping-cart:after,
 .column-labels:after,
 .product:after,
 .totals-item:after {
-  content: '';
+  content: "";
   display: table;
 }
 .shopping-cart[data-v-c028c34c] {
-    margin-top: 73px;
+  margin-top: 73px;
 }
-.group:after, .shopping-cart:after, .column-labels:after, .product:after, .totals-item:after {
+.group:after,
+.shopping-cart:after,
+.column-labels:after,
+.product:after,
+.totals-item:after {
   clear: both;
 }
 
-.group, .shopping-cart, .column-labels, .product, .totals-item {
+.group,
+.shopping-cart,
+.column-labels,
+.product,
+.totals-item {
   zoom: 1;
 }
 
 /* Apply clearfix in a few places */
 /* Apply dollar signs */
-.product .product-price:before, .product .product-line-price:before, .totals-value:before {
-  content: '$';
+.product .product-price:before,
+.product .product-line-price:before,
+.totals-value:before {
+  content: "$";
 }
 
 /* Body/Header stuff */
 body {
   padding: 0px 30px 30px 20px;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
   font-weight: 100;
 }
 
@@ -176,7 +228,9 @@ label {
   margin-bottom: 15px;
   border-bottom: 1px solid #eee;
 }
-.column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
+.column-labels .product-image,
+.column-labels .product-details,
+.column-labels .product-removal {
   text-indent: -9999px;
 }
 
@@ -252,7 +306,4 @@ label {
 .checkout:hover {
   background-color: #494;
 }
-
-
-
 </style>
