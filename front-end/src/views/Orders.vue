@@ -79,13 +79,13 @@ export default {
       }
     },
     deleteOrder(orderId){
-      let v = [];
-      for(order in this.orders){
-        if(order.orderId !== orderId){
-          v.push(order);
-        }
-      }
-      this.orders = v;
+      // let v = [];
+      // for(order in this.orders){
+      //   if(order.orderId !== orderId){
+      //     v.push(order);
+      //   }
+      // }
+      // this.orders = v;
       try {
           fetch( "http://localhost:8080/admin/deleteOrder/" + this.userID + '/' + orderId, {
               method: "delete", 
