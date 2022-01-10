@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import Navbar from "../components/nbar.vue";
 export default {
   name: "Orders",
