@@ -81,8 +81,9 @@ export default {
     deleteOrder(orderId){
       let v = [];
       for(order in this.orders){
-        if(order.orderId !== orderId)
+        if(order.orderId !== orderId){
           v.push(order);
+        }
       }
       this.orders = v;
       try {
