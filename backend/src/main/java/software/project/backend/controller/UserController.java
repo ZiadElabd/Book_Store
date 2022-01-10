@@ -47,5 +47,11 @@ public class UserController {
         if(books!=null) return  new ResponseEntity<>(books, HttpStatus.ACCEPTED);
         return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }
+    @GetMapping("/checkCart/{ID}/{ISBN}")
+    public ResponseEntity<Boolean> checkCart(@PathVariable("ID") String sessionID,
+                                             @PathVariable("ISBN") String ISBN){
+        if(service.checkCart(sessionID,ISBN)) return  new ResponseEntity<>(true, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+    }
 
 }
