@@ -37,8 +37,9 @@ public class BookDAO {
 		return false;
 	}
 
-	public void updateCart(String userName, String ISBN, int newCopies) {
-		jdbcTemplate.update(Commands.updateCart(), userName, ISBN, newCopies);
+	public boolean updateCart(String userName, String ISBN, int newCopies,String date) {
+		jdbcTemplate.update(Commands.updateCart(), newCopies,date ,userName, ISBN);
+		return true;
 	}
 
 	public boolean isInCart(String userName, String ISBN) {

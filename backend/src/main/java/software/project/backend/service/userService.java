@@ -85,7 +85,24 @@ public class userService {
         String userName=trackingSystem.checkAcess(sessionID);
         if (userName==null) return false;
         return productOperation.isInCart(userName,ISBN);
-
+    }
+    public boolean updateCart(String sessionID,String dataSent){
+        String userName=trackingSystem.checkAcess(sessionID);
+        if (userName==null) return false;
+        String ISBN="";
+        int noOfCopies = 0;
+        String date="";
+        try {
+            JSONObject obj = new JSONObject(dataSent);
+            ISBN=obj.getString("isbn");
+            noOfCopies=obj.getInt("noOfCopies");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            date=dtf.format(now);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return productOperation.updateCart(userName,ISBN,noOfCopies,date);
     }
 
 }

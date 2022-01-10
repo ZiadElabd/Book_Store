@@ -53,5 +53,11 @@ public class UserController {
         if(service.checkCart(sessionID,ISBN)) return  new ResponseEntity<>(true, HttpStatus.ACCEPTED);
         return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
     }
+    @PutMapping("updateCart/{ID}")
+    public ResponseEntity<Boolean> updateCart(@PathVariable("ID") String sessionID,
+                                              @RequestBody String temp){
+        if(service.updateCart(sessionID,temp)) return  new ResponseEntity<>(true, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+    }
 
 }

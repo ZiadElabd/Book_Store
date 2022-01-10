@@ -21,7 +21,7 @@ public class Commands {
     }
 
     public static String updateCart() {
-        return "UPDATE CheckOut AS C SET C.noOfCopies = ?  WHERE C.userName = ? AND C.ISBN = ? ";
+        return "UPDATE CheckOut AS C SET C.noOfCopies = ?, C.date=? WHERE C.userName = ? AND C.ISBN = ? ";
     }
 
     public static String Search(String searchText, String type) {
