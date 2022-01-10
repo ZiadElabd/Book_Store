@@ -20,7 +20,8 @@
                          <div>Publication Year: {{product.publicationYear}}$</div> 
                     </div>
                     <br>
-                    <button type="button" class="btn btn-primary"  @click.prevent="addToCart">ADD TO CART</button>
+                    <button type="button" class="btn btn-primary" v-if="! isAdded" @click.prevent="addToCart">ADD TO CART</button>
+                    <button type="button" class="btn btn-primary" v-else  disabled >Added</button>
                 </div>
             </div>
        </div>

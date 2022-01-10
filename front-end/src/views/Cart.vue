@@ -12,40 +12,24 @@
                 <label class="product-line-price">Total</label>
             </div>
 
-            <div class="product">
+            <div class="product" v-for="product in products" :key="product.productId" >
                 <div class="product-image">
-                <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
+                <img  :src="product.image">
                 </div>
                 <div class="product-details">
-                <div class="product-title">Dingo Dog Bones</div>
-                <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
+                <div class="product-title">{{product.title}}</div>
+                  <div>ISBN: {{product.isbn}}$</div>     
+                  <div>Category Name: {{product.categoryName}}$</div>  
+                  <div>Publisher: {{product.publisherName}}$</div> 
+                  <div>Publication Year: {{product.publicationYear}}$</div>
                 </div>
-                <div class="product-price">12.99</div>
+                <div class="product-price">{{product.price}}</div>
                 <div class="product-quantity">
-                <input type="number" value="2" min="1">
+                <input type="number" v-model="product.noOfCopies" @change="incrementQuantity(product)" min="1">
                 </div>
+                
                 <div class="product-removal">
-                <button class="remove-product">
-                    Remove
-                </button>
-                </div>
-                <div class="product-line-price">25.98</div>
-            </div>
-
-            <div class="product">
-                <div class="product-image">
-                <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
-                </div>
-                <div class="product-details">
-                <div class="product-title">Dingo Dog Bones</div>
-                <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
-                </div>
-                <div class="product-price">12.99</div>
-                <div class="product-quantity">
-                <input type="number" value="2" min="1">
-                </div>
-                <div class="product-removal">
-                <button class="remove-product">
+                <button @click="deleteFromCart(product)" class="remove-product">
                     Remove
                 </button>
                 </div>
@@ -120,6 +104,15 @@ export default {
             throw resp;
         });
     },
+    async deleteFromCart(product){
+      try {
+          fetch( "http://localhost:8080/user/deleteFromCart/" + this.userID + '/' + product.isbn, {
+              method: "delete", 
+          })
+      } catch (error) {
+          alert('error');
+      }
+    },
     async getCart(){
       this.products = [];
       try {
@@ -133,6 +126,19 @@ export default {
       } catch (error) {
           alert('error');
       }
+    },
+    incrementQuantity(product){
+      console.log(product.noOfCopies);
+      fetch(
+        "http://localhost:8080/user/updateCart/" + this.userID,
+        {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                isbn: this.product.isbn,
+                noOfCopies: product.noOfCopies
+            })
+        });
     }
   },
   created() {
