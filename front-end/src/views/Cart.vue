@@ -120,7 +120,7 @@ export default {
             throw resp;
         });
     },
-    async getProducts(category){
+    async getCart(){
       this.products = [];
       try {
           let response = await fetch( "http://localhost:8080/user/getCart/" + this.userID , {
@@ -136,7 +136,7 @@ export default {
     }
   },
   created() {
-
+    this.getCart();
   },
 }
 </script>
