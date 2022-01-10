@@ -81,5 +81,11 @@ public class userService {
         if (userName==null) return null;
         return productOperation.getCart(userName);
     }
+    public boolean checkCart(String sessionID,String ISBN){
+        String userName=trackingSystem.checkAcess(sessionID);
+        if (userName==null) return false;
+        return productOperation.isInCart(userName,ISBN);
+
+    }
 
 }
