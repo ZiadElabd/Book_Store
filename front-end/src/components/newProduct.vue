@@ -86,14 +86,15 @@ export default {
       profileURL: "",
       imageSelected: false,
       product: {
-        productId:'',
-        name:"",
-        categoryName:'Clothing',
-        description:"",
+        isbn:"",
+        title:"",
+        noOfCopies:"",
+        categoryId:"",
         price:"",
-        quantity:"",
-        discount: 0,
         image:"",
+        publicationYear:"",
+        threshold:"",
+        publisherId:""
       }
     };
   },

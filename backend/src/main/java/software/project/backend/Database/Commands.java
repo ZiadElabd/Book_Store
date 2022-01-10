@@ -90,8 +90,8 @@ public class Commands {
         return "SELECT * FROM BOOK WHERE ISBN = ?";
     }
 
-    public static String GET_PRODUCTS_BY_CATEGORY() {
-        return "SELECT * FROM PROBOOKDUCT where categoryId = ?";
+    public static String GET_PRODUCTS_BY_CATEGORY(){
+        return "SELECT * FROM BOOK where categoryId = ?" ;
     }
 
     public static String GET_ALL_PRODUCTS() {
