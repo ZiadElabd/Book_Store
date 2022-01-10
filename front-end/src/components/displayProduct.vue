@@ -31,6 +31,11 @@ export default {
     components:{
         Navbar
     },
+    data(){
+        return{
+            isAdded: false,
+        }
+    },
     computed: {
         isAdmin(){
             return this.$store.state.role;
@@ -41,8 +46,24 @@ export default {
     },
     methods: {
         addToCart(){
-
+            fetch(
+            "http://localhost:8080/user/addToCart/" + this.userID,
+            {
+                method: "post",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(this.product)
+            });
+            alert('The book is added to cart');
         },
+        // checkInCart(){//GET http://localhost:8080/user/getCart/{{ID}}
+        //     fetch(
+        //     "http://localhost:8080/user/addToCart/" + this.userID,
+        //     {
+        //         method: "get",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify(this.product)
+        //     });
+        // }
     },
     created() {
         console.log("created");
