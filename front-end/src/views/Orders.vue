@@ -15,14 +15,12 @@
            </tr>
        </thead>
        <tbody>
-          <div  v-for="order in orders" :key="order.isbn">
-            <tr>
+            <tr  v-for="order in orders" :key="order.isbn">
                <td>{{order.orderID}}</td>
                <td>{{order.isbn}}</td>
                <td>{{order.noOfCopies}}</td>
                <td><span @click="deleteOrder(order.orderID)" class="pink">Delete</span></td>
            </tr>
-          </div> 
       </tbody>
    </table>
     </div>
@@ -109,7 +107,7 @@ export default {
 /* The Table Attributes */
 table {
   text-align: center;
-  width: 700px;
+  width: 600px;
   margin: 20px auto;
   font-family: sans-serif;
   border-bottom: 5px solid #009688;
