@@ -16,6 +16,10 @@ public class Commands {
         return "INSERT INTO CheckOut (userName ,ISBN , noOfCopies,date) VALUES (?,?,?,?)";
     }
 
+    public static String isInCart(){
+        return "SELECT Count(*) FROM CheckOut AS C WHERE C.userName = ? AND C.ISBN = ? "; 
+    }
+
     public static String Search(String searchText, String type) {
         if (type == "ISBN" || type == "title" || type == "Publisher")
             return "SELECT * FROM Book WHERE ? LIKE " + "%?%";
