@@ -12,7 +12,7 @@
                 <label class="product-line-price">Total</label>
             </div>
 
-            <div class="product" v-for="product in products" :key="product.productId" >
+            <div class="product" v-for="product in products" :key="product.isbn" >
                 <div class="product-image">
                 <img  :src="product.image">
                 </div>
