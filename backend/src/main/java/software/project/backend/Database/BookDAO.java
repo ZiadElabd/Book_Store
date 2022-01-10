@@ -36,27 +36,27 @@ public class BookDAO {
 		return false;
 	}
 
-	public List<Book> searchWithISBN(String ISBN) {
-		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithISBN(),
-				new BeanPropertyRowMapper(Book.class), ISBN);
+	public List<Book> searchWithISBN(String ISBN,String cateogry) {
+		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithISBN(ISBN),
+				new BeanPropertyRowMapper(Book.class),cateogry);
 		return res;
 	}
 
-	public List<Book> searchWithTitle(String title) {
-		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithTitle(),
-				new BeanPropertyRowMapper(Book.class), title);
+	public List<Book> searchWithTitle(String title,String cateogry) {
+		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithTitle(title),
+				new BeanPropertyRowMapper(Book.class),cateogry);
 		return res;
 	}
 
-	public List<Book> searchWithpublisherName(String name) {
-		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithPublisherName(),
-				new BeanPropertyRowMapper(Book.class), name);
+	public List<Book> searchWithpublisherName(String name,String cateogry) {
+		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithPublisherName(name),
+				new BeanPropertyRowMapper(Book.class),cateogry);
 		return res;
 	}
 
-	public List<Book> searchWithAuthorName(String name) {
-		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithAuthorName(),
-				new BeanPropertyRowMapper(Book.class), name);
+	public List<Book> searchWithAuthorName(String name,String cateogry) {
+		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithAuthorName(name),
+				new BeanPropertyRowMapper(Book.class),cateogry);
 		return res;
 	}
 

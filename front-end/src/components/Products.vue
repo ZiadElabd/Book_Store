@@ -22,9 +22,9 @@
       </div>
       <div class="searchBtn">
         <select id="cars" v-model="searchType" @change="onChange($event)">
-          <option value="title">Title</option>
+          <option value="Title">Title</option>
           <option value="ISBN">ISBN</option>
-          <option value="author">Author</option>
+          <option value="Author">Author</option>
           <option value="Publisher">Publisher</option>
         </select>
         <b-button variant="primary" @click="search" class="btn  btn-lg btn-full "> Search </b-button>
@@ -112,7 +112,7 @@ export default {
     async search(){
         try {
           let response = await fetch( "http://localhost:8080/admin/search/" + this.userID, {
-              method: "get",
+              method: "post",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 categoryName: this.category,

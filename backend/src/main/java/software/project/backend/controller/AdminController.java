@@ -113,6 +113,14 @@ public class AdminController {
         if(orders!=null) return  new ResponseEntity<>(orders, HttpStatus.ACCEPTED);
         return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }
+    @PostMapping("search/{ID}")
+    public ResponseEntity<List<Book>> search(@PathVariable("ID") String sessionID,
+                                             @RequestBody String temp){
+        System.out.println(temp);
+        List<Book> books=service.search(sessionID,temp);
+        if(books!=null) return  new ResponseEntity<>(books, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+    }
 
 
 

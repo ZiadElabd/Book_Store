@@ -7,6 +7,7 @@ public class order {
     private  int orderID;
     private int noOfCopies;
     private String isbn;
+    public order(){}
     public order(String sentData){
         try {
             JSONObject obj = new JSONObject(sentData);

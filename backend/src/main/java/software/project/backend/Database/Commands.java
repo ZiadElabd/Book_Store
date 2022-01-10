@@ -15,20 +15,20 @@ public class Commands {
             return "SELECT * FROM Book AS B WHERE B.ISBN IN (SELECT ISBN FROM BookAuthors WHERE authorName =  ?)";
     }
 
-    public static String searchWithISBN() {
-        return "SELECT * FROM Book AS B WHERE B.ISBN LIKE '%?%' ";
+    public static String searchWithISBN(String text) {
+        return "SELECT * FROM Book AS B WHERE B.ISBN LIKE '%"+text+ "%' AND B.categoryName=?";
     }
 
-    public static String searchWithTitle() {
-        return "SELECT * FROM Book AS B WHERE B.title LIKE '%?%' ";
+    public static String searchWithTitle(String text) {
+        return "SELECT * FROM Book AS B WHERE B.title LIKE  '%" +text+ "%' AND B.categoryName=? ";
     }
 
-    public static String searchWithPublisherName() {
-        return "SELECT * FROM Book AS B WHERE B.publisherName LIKE '%?%' ";
+    public static String searchWithPublisherName(String text) {
+        return "SELECT * FROM Book AS B WHERE B.publisherName LIKE '%"+ text +"%' AND B.categoryName=?";
     }
 
-    public static String searchWithAuthorName() {
-        return "SELECT * FROM Book AS B WHERE B.ISBN IN (SELECT ISBN FROM BookAuthors AS BA  WHERE BA.authorName LIKE '%?%') ";
+    public static String searchWithAuthorName(String text) {
+        return "SELECT * FROM Book AS B WHERE B.ISBN IN (SELECT ISBN FROM BookAuthors AS BA  WHERE BA.authorName LIKE '%"+ text+"%') AND B.categoryName=? ";
     }
 
     public static String insertCheckOut() {

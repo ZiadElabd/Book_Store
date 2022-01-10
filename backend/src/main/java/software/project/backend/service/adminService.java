@@ -98,7 +98,8 @@ public class adminService {
         return userOperation.changePassword(userName,newPassword);
     }
     public boolean insertOrder(String sessionID,String dataSent){
-
+        String userName=trackingSystem.checkAcess(sessionID);
+        if (userName==null) return false;
         order n=new order(dataSent);
         return productOperation.insertOrder(n.getIsbn(),n.getNoOfCopies());
     }
@@ -111,6 +112,31 @@ public class adminService {
         String userName=trackingSystem.checkAcess(sessionID);
         if (userName==null) return null;
         return productOperation.getAllOrders();
+    }
+    public List<Book> search(String sessionID,String dataSent){
+        String userName=trackingSystem.checkAcess(sessionID);
+        if (userName==null) return null;
+        String cateogry="";
+        String type="";
+        String searchText="";
+        try {
+            JSONObject obj = new JSONObject(dataSent);
+            cateogry=obj.getString("categoryName");
+            type=obj.getString("type");
+            searchText=obj.getString("searchText");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (type.equals("ISBN")){
+            return productOperation.searchWithISBN(searchText,cateogry);
+        }else if (type.equals("Title")){
+            return productOperation.searchWithTitle(searchText,cateogry);
+        }else if(type.equals("Author")){
+            return productOperation.searchWithAuthorName(searchText,cateogry);
+        }
+        else {
+            return productOperation.searchWithpublisherName(searchText,cateogry);
+        }
     }
 
 
