@@ -86,6 +86,7 @@ export default {
         console.log("created");
         console.log(this.product);
         this.checkInCart();
+        console.log(this.isAdded);
     },
 
 }
