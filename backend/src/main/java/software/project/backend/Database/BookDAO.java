@@ -73,6 +73,35 @@ public class BookDAO {
 				new BeanPropertyRowMapper(Book.class));
 		return products;
 	}
+	
+	public List<Book> getAllOrders() {
+		List<Book> products = jdbcTemplate.query(Commands.allOrders(),
+				new BeanPropertyRowMapper(Book.class));
+		return products;
+	}
+	
+	public boolean insertOrder(String isbn, int noOfCopies) {
+
+		int result = jdbcTemplate.update(Commands.insertOrder(),
+				isbn,noOfCopies);
+
+		if (result > 0) {
+			System.out.println("A new product has been inserted.");
+			return true ;
+		}
+		return false ;
+	}
+	
+	public boolean deleteOrder(int productId) {
+
+		int result = jdbcTemplate.update(Commands.deleteOrder(), productId);
+
+		if (result > 0) {
+			System.out.println("A new has been deleted");
+			return true ;
+		}
+		return false ;
+	}
 
 	public boolean deleteProduct(int productId) {
 

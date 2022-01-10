@@ -24,8 +24,8 @@ public class Commands {
         return "SELECT * FROM Orders";
     }
 
-    public static String deleteOrder(String id) {
-        return "DELETE FROM Orders AS O WHERE O.orderId = " + id;
+    public static String deleteOrder() {
+        return "DELETE FROM Orders WHERE orderId = ?" ;
     }
     
     public static String insertOrder() {
