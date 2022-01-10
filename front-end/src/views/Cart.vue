@@ -39,7 +39,7 @@
           </div>
         </div>
 
-        <button class="checkout">Checkout</button>
+        <button @click="deleteCart" class="checkout">Checkout</button>
       </div>
     </div>
   </div>
@@ -79,7 +79,20 @@ export default {
         throw resp;
       });
     },
-    async deleteFromCart(product) {
+    deleteCart() {
+      try {
+        fetch(
+          "http://localhost:8080/user/deleteCart/" + this.userID,
+          {
+            method: "delete",
+          }
+        );
+      } catch (error) {
+        alert("error");
+      }
+      this.products = [];
+    },
+    deleteFromCart(product) {
       try {
         fetch(
           "http://localhost:8080/user/deleteFromCart/" +
