@@ -75,7 +75,7 @@ public class Commands {
 
     public static String INSERT_PRODUCT() {
         return "INSERT INTO BOOK " +
-                "(ISBN,title, noOfCopies, price, publicationYear, threshold, categoryId, publisherId,image) " +
+                "(ISBN,title, noOfCopies, price, publicationYear, threshold, categoryName, publisherName,image) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?)";
     }
 
