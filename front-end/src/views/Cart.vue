@@ -7,19 +7,24 @@
           <label class="product-image">Image</label>
           <label class="product-details">Product</label>
           <label class="product-price">Price</label>
-          <label class="product-quantity">Quantity</label>
           <label class="product-removal">Remove</label>
           <label class="product-line-price">Total</label>
         </div>
          <div class="product" v-for="product in products" :key="product.isbn">
-            <div class="product-details">
+            <div class="product-image"><img :src="product.image"></div>
+                <div class="product-details">
                 <div class="product-title">{{product.title}}</div>
-                <div class="product-image"><img  :src="product.image"></div>
                 <div>ISBN: {{product.isbn}}$</div>     
                 <div>Category Name: {{product.categoryName}}$</div>  
                 <div>Publisher: {{product.publisherName}}$</div> 
                 <div>Publication Year: {{product.publicationYear}}$</div>
-            </div>
+                </div>
+                <div class="product-line-price">{{product.price}}</div>
+                <div class="product-removal">
+                <button class="remove-product">
+                    Remove
+                </button>
+                </div>
          </div>
 
         <div class="totals">
@@ -164,51 +169,36 @@ export default {
 }
 
 /* This is used as the traditional .clearfix class */
-.group:before,
-.shopping-cart:before,
-.column-labels:before,
-.product:before,
-.totals-item:before,
+.group:before, .shopping-cart:before, .column-labels:before, .product:before, .totals-item:before,
 .group:after,
 .shopping-cart:after,
 .column-labels:after,
 .product:after,
 .totals-item:after {
-  content: "";
+  content: '';
   display: table;
 }
 .shopping-cart[data-v-c028c34c] {
-  margin-top: 73px;
+    margin-top: 73px;
 }
-.group:after,
-.shopping-cart:after,
-.column-labels:after,
-.product:after,
-.totals-item:after {
+.group:after, .shopping-cart:after, .column-labels:after, .product:after, .totals-item:after {
   clear: both;
 }
 
-.group,
-.shopping-cart,
-.column-labels,
-.product,
-.totals-item {
+.group, .shopping-cart, .column-labels, .product, .totals-item {
   zoom: 1;
 }
 
 /* Apply clearfix in a few places */
 /* Apply dollar signs */
-.product .product-price:before,
-.product .product-line-price:before,
-.totals-value:before {
-  content: "$";
+.product .product-price:before, .product .product-line-price:before, .totals-value:before {
+  content: '$';
 }
 
 /* Body/Header stuff */
 body {
   padding: 0px 30px 30px 20px;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
-    Helvetica, Arial, sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
 }
 
@@ -230,9 +220,7 @@ label {
   margin-bottom: 15px;
   border-bottom: 1px solid #eee;
 }
-.column-labels .product-image,
-.column-labels .product-details,
-.column-labels .product-removal {
+.column-labels .product-image, .column-labels .product-details, .column-labels .product-removal {
   text-indent: -9999px;
 }
 
@@ -308,4 +296,7 @@ label {
 .checkout:hover {
   background-color: #494;
 }
+
+
+
 </style>
