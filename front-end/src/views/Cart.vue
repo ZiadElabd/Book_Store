@@ -3,21 +3,14 @@
     <Navbar />
     <div class="container">
       <div class="shopping-cart">
-        <div class="column-labels">
-          <label class="product-image">Image</label>
-          <label class="product-details">Product</label>
-          <label class="product-price">Price</label>
-          <label class="product-removal">Remove</label>
-          <label class="product-line-price">Total</label>
-        </div>
          <div class="product" v-for="product in products" :key="product.isbn">
             <div class="product-image"><img :src="product.image"></div>
                 <div class="product-details">
                 <div class="product-title">{{product.title}}</div>
-                <div>ISBN: {{product.isbn}}$</div>     
-                <div>Category Name: {{product.categoryName}}$</div>  
-                <div>Publisher: {{product.publisherName}}$</div> 
-                <div>Publication Year: {{product.publicationYear}}$</div>
+                <div>ISBN: {{product.isbn}}</div>     
+                <div>Category Name: {{product.categoryName}}</div>  
+                <div>Publisher: {{product.publisherName}}</div> 
+                <div>Publication Year: {{product.publicationYear}}</div>
                 </div>
                 <div class="product-line-price">{{product.price}}</div>
                 <div class="product-removal">
@@ -295,6 +288,9 @@ label {
 
 .checkout:hover {
   background-color: #494;
+}
+.product-line-price{
+  margin-right: 140px;
 }
 
 
