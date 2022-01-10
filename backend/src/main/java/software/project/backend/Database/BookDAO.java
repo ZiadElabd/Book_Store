@@ -36,27 +36,27 @@ public class BookDAO {
 		return false;
 	}
 
-	public List<Book> searchWithISBN(String ISBN,String cateogry) {
+	public List<Book> searchWithISBN(String ISBN, String cateogry) {
 		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithISBN(ISBN),
-				new BeanPropertyRowMapper(Book.class),cateogry);
+				new BeanPropertyRowMapper(Book.class), cateogry);
 		return res;
 	}
 
-	public List<Book> searchWithTitle(String title,String cateogry) {
+	public List<Book> searchWithTitle(String title, String cateogry) {
 		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithTitle(title),
-				new BeanPropertyRowMapper(Book.class),cateogry);
+				new BeanPropertyRowMapper(Book.class), cateogry);
 		return res;
 	}
 
-	public List<Book> searchWithpublisherName(String name,String cateogry) {
+	public List<Book> searchWithpublisherName(String name, String cateogry) {
 		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithPublisherName(name),
-				new BeanPropertyRowMapper(Book.class),cateogry);
+				new BeanPropertyRowMapper(Book.class), cateogry);
 		return res;
 	}
 
-	public List<Book> searchWithAuthorName(String name,String cateogry) {
+	public List<Book> searchWithAuthorName(String name, String cateogry) {
 		List<Book> res = (List<Book>) jdbcTemplate.query(Commands.searchWithAuthorName(name),
-				new BeanPropertyRowMapper(Book.class),cateogry);
+				new BeanPropertyRowMapper(Book.class), cateogry);
 		return res;
 	}
 
@@ -87,6 +87,14 @@ public class BookDAO {
 		jdbcTemplate.update(Commands.deleteFromCheckOutWithUserISBN(), userName, ISBN);
 	}
 
+	public List<Book> getCart(String userName) {
+		return jdbcTemplate.query(Commands.getCart(), new BeanPropertyRowMapper(Book.class), userName);
+	}
+
+	public void insertToCart(String userName, String ISBN, int noOpCopies, String date) {
+		jdbcTemplate.update(Commands.insertToCart(), userName, ISBN, noOpCopies, date);
+	}
+
 	public List<Book> getBooksFromCheckOut(String userName) {
 		List<Book> books = (List<Book>) jdbcTemplate.query(Commands.getBooks(), new BeanPropertyRowMapper(Book.class),
 				userName);
@@ -111,7 +119,7 @@ public class BookDAO {
 				new BeanPropertyRowMapper(Book.class));
 		return products;
 	}
-	
+
 	public List<order> getAllOrders() {
 		List<order> products = jdbcTemplate.query(Commands.allOrders(),
 				new BeanPropertyRowMapper(order.class));
@@ -129,7 +137,7 @@ public class BookDAO {
 		}
 		return false;
 	}
-	
+
 	public boolean deleteOrder(int orderID) {
 
 		int result = jdbcTemplate.update(Commands.deleteOrder(), orderID);

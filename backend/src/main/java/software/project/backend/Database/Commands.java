@@ -8,6 +8,14 @@ public class Commands {
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
     }
 
+    public static String getCart() {
+        return " SELECT B.ISBN , B.title , C.noOfCopies , B.price, B.publicationYear,B.threshold,B.publisherName,B.image,B.categoryName FROM Book AS B JOIN CheckOut AS C ON C.ISBN = B.ISBN WHERE C.userName = ? ";
+    }
+
+    public static String insertToCart() {
+        return "INSERT INTO CheckOut (userName ,ISBN , noOfCopies,date) VALUES (?,?,?,?)";
+    }
+
     public static String Search(String searchText, String type) {
         if (type == "ISBN" || type == "title" || type == "Publisher")
             return "SELECT * FROM Book WHERE ? LIKE " + "%?%";
@@ -16,19 +24,20 @@ public class Commands {
     }
 
     public static String searchWithISBN(String text) {
-        return "SELECT * FROM Book AS B WHERE B.ISBN LIKE '%"+text+ "%' AND B.categoryName=?";
+        return "SELECT * FROM Book AS B WHERE B.ISBN LIKE '%" + text + "%' AND B.categoryName=?";
     }
 
     public static String searchWithTitle(String text) {
-        return "SELECT * FROM Book AS B WHERE B.title LIKE  '%" +text+ "%' AND B.categoryName=? ";
+        return "SELECT * FROM Book AS B WHERE B.title LIKE  '%" + text + "%' AND B.categoryName=? ";
     }
 
     public static String searchWithPublisherName(String text) {
-        return "SELECT * FROM Book AS B WHERE B.publisherName LIKE '%"+ text +"%' AND B.categoryName=?";
+        return "SELECT * FROM Book AS B WHERE B.publisherName LIKE '%" + text + "%' AND B.categoryName=?";
     }
 
     public static String searchWithAuthorName(String text) {
-        return "SELECT * FROM Book AS B WHERE B.ISBN IN (SELECT ISBN FROM BookAuthors AS BA  WHERE BA.authorName LIKE '%"+ text+"%') AND B.categoryName=? ";
+        return "SELECT * FROM Book AS B WHERE B.ISBN IN (SELECT ISBN FROM BookAuthors AS BA  WHERE BA.authorName LIKE '%"
+                + text + "%') AND B.categoryName=? ";
     }
 
     public static String insertCheckOut() {
