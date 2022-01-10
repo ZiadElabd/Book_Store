@@ -32,7 +32,7 @@ public class adminService {
         String userName=trackingSystem.checkAcess(sessionID);
         if (userName==null) return false;
         Book product=(Book) director.composeModel("book",dataSent);
-        return productOperation.updateProduct(product,productID);
+        return productOperation.updateProduct(product);
     }
     public boolean deleteProduct(String sessionID,String productID){
         String userName=trackingSystem.checkAcess(sessionID);

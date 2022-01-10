@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import software.project.backend.Model.Book;
 import software.project.backend.Model.User;
+import software.project.backend.Model.builder.order;
 import software.project.backend.sercuirty.Singelton;
 import software.project.backend.service.adminService;
 
@@ -92,6 +93,25 @@ public class AdminController {
         System.out.println(temp);
         if(service.changePassword(sessionID,temp)) return  new ResponseEntity<>(true, HttpStatus.ACCEPTED);
         return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+    }
+    @PostMapping("/insertOrder/{ID}")
+    public ResponseEntity<Boolean> insertOrder(@PathVariable("ID") String sessionID,
+                                               @RequestBody String temp){
+        if(service.insertOrder(sessionID,temp)) return  new ResponseEntity<>(true, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+    }
+    @DeleteMapping("/deleteOrder/{ID}/{orderID}")
+    public ResponseEntity<Boolean> deleteOrder (@PathVariable("ID") String sessionID,
+                                                @PathVariable("orderID") int orderID){
+        if(service.deleteOrder(sessionID,orderID)) return  new ResponseEntity<>(true, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+
+    }
+    @GetMapping("getOrder/{ID}")
+    public ResponseEntity<List<order>> getAllOrders(@PathVariable("ID") String sessionID){
+        List<order> orders =service.getAllOrder(sessionID);
+        if(orders!=null) return  new ResponseEntity<>(orders, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
     }
 
 

@@ -36,10 +36,9 @@ public class BookDAO {
 		return false ;
 	}
 
-	public boolean updateProduct(Book p, int productId) {
+	public boolean updateProduct(Book p) {
 
 		int result = jdbcTemplate.update(Commands.UPDATE_PRODUCT(),
-				p.getIsbn(),
 				p.getTitle(),
 				p.getNoOfCopies(),
 				p.getPrice() ,
@@ -48,7 +47,7 @@ public class BookDAO {
 				p.getCategoryName(),
 				p.getPublisherName(),
 				p.getImage(),
-				productId);
+				p.getIsbn());
 		if (result > 0) {
 			System.out.println("A new row has been updated.");
 			return true ;
