@@ -110,9 +110,10 @@ export default {
         });
     },
     async search(){
+      console.log('search');
         try {
           let response = await fetch( "http://localhost:8080/admin/search/" + this.userID, {
-              method: "get",
+              method: "post",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 categoryName: this.category,
