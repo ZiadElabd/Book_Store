@@ -24,13 +24,6 @@ public class Commands {
         return "UPDATE CheckOut AS C SET C.noOfCopies = ?, C.date=? WHERE C.userName = ? AND C.ISBN = ? ";
     }
 
-    public static String Search(String searchText, String type) {
-        if (type == "ISBN" || type == "title" || type == "Publisher")
-            return "SELECT * FROM Book WHERE ? LIKE " + "%?%";
-        else
-            return "SELECT * FROM Book AS B WHERE B.ISBN IN (SELECT ISBN FROM BookAuthors WHERE authorName =  ?)";
-    }
-
     public static String searchWithISBN(String text) {
         return "SELECT * FROM Book AS B WHERE B.ISBN LIKE '%" + text + "%' AND B.categoryName=?";
     }
@@ -138,7 +131,7 @@ public class Commands {
     }
 
     public static String GET_PRODUCTS_BY_CATEGORY() {
-        return "UPDATE * FROM BOOK where categoryName = ?";
+        return " SELECT* FROM BOOK where categoryName = ?";
     }
 
     public static String GET_ALL_PRODUCTS() {
