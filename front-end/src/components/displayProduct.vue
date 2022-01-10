@@ -45,6 +45,21 @@ export default {
         }
     },
     methods: {
+        parseText: function (resp) {
+            return resp.text();
+        },
+        checkStatus: function (resp) {
+            console.log('status');
+            console.log(resp);
+            if (resp.status >= 200 && resp.status < 300) {
+                console.log('good status');
+                return resp;
+            }
+            console.log('bad status');
+            return this.parseJSON(resp).then((resp) => {
+                throw resp;
+            });
+        },
         addToCart(){
             fetch(
             "http://localhost:8080/user/addToCart/" + this.userID,
@@ -55,19 +70,22 @@ export default {
             });
             alert('The book is added to cart');
         },
-        // checkInCart(){//GET http://localhost:8080/user/getCart/{{ID}}
-        //     fetch(
-        //     "http://localhost:8080/user/addToCart/" + this.userID,
-        //     {
-        //         method: "get",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify(this.product)
-        //     });
-        // }
+        async checkInCart(){
+            let response = await fetch(
+            "http://localhost:8080/user/checkCart/" + this.userID + "/" + this.product.isbn ,
+            {
+                method: "get",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(this.product)
+            }).then(this.checkStatus)
+            .then(this.parseText);
+            this.isAdded = response;
+        }
     },
     created() {
         console.log("created");
         console.log(this.product);
+        this.checkInCart();
     },
 
 }
