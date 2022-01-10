@@ -15,7 +15,6 @@
             <div class="product-details">
                 <div class="product-title">{{product.title}}</div>
                 <div class="product-image"><img  :src="product.image"></div>
-                <div class="product-title">{{product.title}}</div>
                 <div>ISBN: {{product.isbn}}$</div>     
                 <div>Category Name: {{product.categoryName}}$</div>  
                 <div>Publisher: {{product.publisherName}}$</div> 
