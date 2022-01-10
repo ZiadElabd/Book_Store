@@ -69,6 +69,7 @@ export default {
         searchValue:'',
         searchType: 'ISBN',
         products:[],
+        category:'Science'
     }
   },
   computed: {
@@ -108,8 +109,23 @@ export default {
             throw resp;
         });
     },
-    search(){
-        // search request
+    async search(){
+        try {
+          let response = await fetch( "http://localhost:8080/admin/search/" + this.userID, {
+              method: "get",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                categoryName: this.category,
+                type:this.searchType,
+                searchText:this.searchValue
+              }) 
+          }).then(this.checkStatus)
+          .then(this.parseJSON);
+          console.log(response);
+          this.products = response;
+      } catch (error) {
+          alert('error');
+      }
     },
     view(product){
       if(this.isAdmin){
@@ -137,6 +153,7 @@ export default {
     console.log("created");
     bus.$on('changeCategory', (data) => {
       this.getProducts(data);
+      this.category = data;
     })
     this.getProducts('Science');
   },
