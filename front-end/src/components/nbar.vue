@@ -21,9 +21,10 @@
         </ul>
 
       <div class="setting">
-          <div to="/Cart" v-if="!isAdmin" class="icon">
+         <router-link to="/cart"><div to="/Cart" v-if="!isAdmin" class="icon">
             <i  class="fa fa-shopping-cart" aria-hidden="true"></i>
-          </div>
+          </div></router-link>
+          
           <b-dropdown>
             <template #button-content>
                   <em><font-awesome-icon icon="cog" /></em>
