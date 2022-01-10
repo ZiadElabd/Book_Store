@@ -7,14 +7,17 @@
                 </div>
                 <div class="description">
                 <div class="name">
-                        <h1>{{product.name}}</h1>
-                        <p>{{product.description}}</p>
+                        <h1>{{product.title}}</h1>
                 </div>
 
                     
                     <div class="price">
-                        <div>Quantity: {{product.quantity}}</div>
-                        <div>Price: {{product.price}}$</div>      
+                        <div>ISBN: {{product.isbn}}$</div>     
+                        <div>no.of Copies: {{product.noOfCopies}}</div>
+                        <div>Price: {{product.price}}$</div>   
+                        <div>Category Name: {{product.categoryName}}$</div>  
+                         <div>Publisher: {{product.publisherName}}$</div> 
+                         <div>Publication Year: {{product.publicationYear}}$</div> 
                     </div>
                     <br>
                     <button type="button" class="btn btn-primary"  @click.prevent="addToCart">ADD TO CART</button>

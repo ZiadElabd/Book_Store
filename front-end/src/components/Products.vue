@@ -38,12 +38,12 @@
                         <img :src="product.image" />
                         <div class="box-price">${{product.price}}</div>
                     </div>
-                    <h4 class="box-title">{{product.name}}</h4>  
+                    <h4 class="box-title">{{product.title}}</h4>  
                     <div class="box-heading text-uppercase">{{product.categoryName}}</div>
                     <div class="box-btns">
                         <a @click="view(product)" class="btn btn-primary text-uppercase">view</a>
                     </div>
-                    <div class="box-id">{{product.id}}</div>
+                    <div class="box-id">{{product.ISBN}}</div>
                     </div>
                 </div> 
                

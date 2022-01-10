@@ -9,33 +9,32 @@
                 
                 <form>
                   <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
+                    <label for="Title" class="form-label">Title</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="name"
-                      v-model="product.name"
+                      id="Title"
+                      v-model="product.title"
                     />
                   </div>
                   <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
+                    <label for="ISBN" class="form-label">ISBN</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="description"
-                      v-model="product.description"
+                      id="ISBN"
+                      v-model="product.isbn"
                     />
                   </div>
                    <div class="mb-3">
                       <label  class="form-label">Category</label>
                      <select v-model="product.categoryName" class="form-select" aria-label="Default select example">
                         <option selected>Open this select menu</option>
-                        <option value="Clothing">Clothing</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Shoes">Shoes</option>
-                        <option value="Watches">Watches</option>
-                        <option value="Jewallery">Jewallery</option>
-                        <option value="Sports">Sports</option>
+                        <option value="Science">Science</option>
+                        <option value="Art">Art</option>
+                        <option value="Religion">Religion</option>
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
                       </select>
                    </div>
                     <div class="mb-3">
@@ -47,13 +46,31 @@
                       v-model="product.price"
                     />
                   </div>
-                   <div class="mb-3">
-                    <label for="quantity" class="form-label">Quantity</label>
+                  <div class="mb-3">
+                    <label for="publicationYear" class="form-label">publication Year</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="quantity"
-                      v-model="product.quantity"
+                      id="publicationYear"
+                      v-model="product.publicationYear"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="threshold" class="form-label">Threshold</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="threshold"
+                      v-model="product.threshold"
+                    />
+                  </div>
+                   <div class="mb-3">
+                    <label for="no.of Copies" class="form-label">no.of Copies</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="no.of Copies"
+                      v-model="product.noOfCopies"
                     />
                   </div>
                 </form>
@@ -89,12 +106,12 @@ export default {
         isbn:"",
         title:"",
         noOfCopies:"",
-        categoryId:"",
+        categoryName:"",
         price:"",
         image:"",
         publicationYear:"",
         threshold:"",
-        publisherId:""
+        publisherName:""
       }
     };
   },
@@ -174,7 +191,6 @@ export default {
 
 .product{
     width: 90%;
-    height: 600px;
     background-color: #EEEEEE;
     top: 50%;
     left: 50%;
@@ -183,6 +199,7 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: 30px ;
+    margin-top: 100px;
 }
 .photo , .description{
     width: 40%;
