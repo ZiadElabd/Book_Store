@@ -6,15 +6,15 @@
            
             <div class="form-group">
                 <label>ISBN</label>
-                <input type="text"  class="form-control form-control-lg" placeholder="ISBN" />
+                <input type="text" v-model="order.isbn" class="form-control form-control-lg" placeholder="ISBN" />
             </div>
 
             <div class="form-group">
                 <label>No.of Copies</label>
-                <input type="text"  class="form-control form-control-lg shadow-none" placeholder="Copies" />
+                <input type="text"  v-model="order.noOfCopies" class="form-control form-control-lg shadow-none" placeholder="Copies" />
             </div>
             <div class="form-group ">
-                 <b-button variant="primary"  class="btn  btn-lg btn-full "> Add new Order</b-button>
+                 <b-button variant="primary" @click="addNewOrder" class="btn  btn-lg btn-full "> Add new Order</b-button>
         </div>
         </form>
             
@@ -32,7 +32,10 @@ export default {
   },
   data() {
     return {
-     
+     order:{
+       isbn: '',
+       noOfCopies:''
+     }
     };
   },
   computed:{
@@ -47,8 +50,17 @@ export default {
     },
   },
   methods: {
-
-}
+    addNewOrder(){
+        fetch(
+          "http://localhost:8080/admin/insertOrder/" + this.userID,
+          {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(this.order)
+          }
+        );
+    }
+  }
 }
 </script>
 <style scoped>

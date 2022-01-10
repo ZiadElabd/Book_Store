@@ -15,29 +15,14 @@
            </tr>
        </thead>
        <tbody>
-           <tr>
-               <td>Ninja</td>
-               <td>Ahmed Mohamed</td>
-               <td>120</td>
-               <td><span class="pink">Delete</span></td>
-           </tr>
-          
-           
-           <tr>
-               <td >Valhala</td>
-               <td>Mohamed Ibrahim</td>
-               <td>190</td>
-               <td><span class="pink">Delete</span></td>
-           </tr>
+          <div  v-for="order in orders" :key="order.isbn">
             <tr>
-               <td >Valhala</td>
-               <td>Mohamed Ibrahim</td>
-               <td>190</td>
-               <td><span class="pink">Delete</span></td>
+               <td>{{order.orderID}}</td>
+               <td>{{order.isbn}}</td>
+               <td>{{order.noOfCopies}}</td>
+               <td><span @click="deleteOrder(order.orderID)" class="pink">Delete</span></td>
            </tr>
-           
-           
-          
+          </div> 
       </tbody>
    </table>
     </div>
@@ -53,7 +38,7 @@ export default {
   },
   data() {
     return {
-     
+      orders:[],
     };
   },
   computed:{
@@ -68,8 +53,47 @@ export default {
     },
   },
   methods: {
-
-}
+    parseJSON: function (resp) {
+        return resp.json();
+    },
+    checkStatus: function (resp) {
+        console.log('status');
+        console.log(resp);
+        if (resp.status >= 200 && resp.status < 300) {
+            console.log('good status');
+            return resp;
+        }
+        console.log('bad status');
+        return this.parseJSON(resp).then((resp) => {
+            throw resp;
+        });
+    },
+    async getOrders(){
+      try {
+          let response = await fetch( "http://localhost:8080/admin/getOrder/" + this.userID, {
+              method: "get", 
+          }).then(this.checkStatus)
+          .then(this.parseJSON);
+          console.log(response);
+          this.orders = response;
+      } catch (error) {
+          alert('error');
+      }
+    },
+    deleteOrder(orderId){
+      this.orders = this.orders.filter(item => item.orderId !== orderId);
+      try {
+          fetch( "http://localhost:8080/admin/deleteOrder/" + this.userID + '/' + orderId, {
+              method: "delete", 
+          })
+      } catch (error) {
+          alert('error');
+      }
+    }
+  },
+  created() {
+    this.getOrders();
+  },
 }
 </script>
 <style scoped>
