@@ -12,6 +12,8 @@ import software.project.backend.Model.builder.Director;
 import software.project.backend.sercuirty.Singelton;
 import software.project.backend.sercuirty.passwordOperations;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class userService {
@@ -49,15 +51,35 @@ public class userService {
     public boolean addToCart(String sessionID,String dataSent){
         String userName=trackingSystem.checkAcess(sessionID);
         if (userName==null) return false;
-        String
-
+        String ISBN="";
+        int noOfCopies = 0;
+        String date="";
         try {
             JSONObject obj = new JSONObject(dataSent);
-
+            ISBN=obj.getString("isbn");
+            noOfCopies=obj.getInt("noOfCopies");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            date=dtf.format(now);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        return productOperation.insertToCart(userName,ISBN,noOfCopies,date);
+    }
+    public boolean deleteFromCart(String sessionID,String ISBN ){
+        String userName=trackingSystem.checkAcess(sessionID);
+        if (userName==null) return false;
+        return productOperation.delelteFromCheckOut(userName,ISBN);
+    }
+    public boolean deleteCart(String sessionID){
+        String userName=trackingSystem.checkAcess(sessionID);
+        if (userName==null) return false;
+        return productOperation.deleteCheckOut(userName);
+    }
+    public List<Book> getCart(String sessionID){
+        String userName=trackingSystem.checkAcess(sessionID);
+        if (userName==null) return null;
+        return productOperation.getCart(userName);
     }
 
 }

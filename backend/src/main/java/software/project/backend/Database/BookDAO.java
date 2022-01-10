@@ -79,20 +79,23 @@ public class BookDAO {
 		return false;
 	}
 
-	public void delelteFromCheckOutWithUserName(String userName) {
+	public boolean deleteCheckOut(String userName) {
 		jdbcTemplate.update(Commands.deleteFromCheckOutWithUserName(), userName);
+		return true;
 	}
 
-	public void delelteFromCheckOut(String userName, String ISBN) {
+	public boolean delelteFromCheckOut(String userName, String ISBN) {
 		jdbcTemplate.update(Commands.deleteFromCheckOutWithUserISBN(), userName, ISBN);
+		return true;
 	}
 
 	public List<Book> getCart(String userName) {
 		return jdbcTemplate.query(Commands.getCart(), new BeanPropertyRowMapper(Book.class), userName);
 	}
 
-	public void insertToCart(String userName, String ISBN, int noOpCopies, String date) {
-		jdbcTemplate.update(Commands.insertToCart(), userName, ISBN, noOpCopies, date);
+	public boolean insertToCart(String userName, String ISBN, int noOpCopies, String date) {
+		 jdbcTemplate.update(Commands.insertToCart(), userName, ISBN, noOpCopies, date);
+		 return true;
 	}
 
 	public List<Book> getBooksFromCheckOut(String userName) {
