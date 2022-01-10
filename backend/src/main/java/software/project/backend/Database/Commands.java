@@ -10,10 +10,25 @@ public class Commands {
 
     public static String Search(String searchText, String type) {
         if (type == "ISBN" || type == "title" || type == "Publisher")
-            return "SELECT * FROM Book WHERE " + type.toLowerCase() + "LIKE " + "% " + searchText.toLowerCase() + "%";
+            return "SELECT * FROM Book WHERE ? LIKE " + "%?%";
         else
-            return "SELECT * FROM Book AS B WHERE B.ISBN IN (SELECT ISBN FROM BookAuthors WHERE authorName = "
-                    + searchText + ")";
+            return "SELECT * FROM Book AS B WHERE B.ISBN IN (SELECT ISBN FROM BookAuthors WHERE authorName =  ?)";
+    }
+
+    public static String searchWithISBN() {
+        return "SELECT * FROM Book AS B WHERE B.ISBN LIKE '%?%' ";
+    }
+
+    public static String searchWithTitle() {
+        return "SELECT * FROM Book AS B WHERE B.title LIKE '%?%' ";
+    }
+
+    public static String searchWithPublisherName() {
+        return "SELECT * FROM Book AS B WHERE B.publisherName LIKE '%?%' ";
+    }
+
+    public static String searchWithAuthorName() {
+        return "SELECT * FROM Book AS B WHERE B.ISBN IN (SELECT ISBN FROM BookAuthors AS BA  WHERE BA.authorName LIKE '%?%') ";
     }
 
     public static String insertCheckOut() {
@@ -24,20 +39,32 @@ public class Commands {
         return "SELECT * FROM Orders";
     }
 
-    public static String deleteOrder() {
-        return "DELETE FROM Orders WHERE orderId = ?" ;
+    public static String addToCheckOut() {
+        return "INSERT INTO CheckOut(userName,ISBN,noOfCopies,data) VALUES (?,?,?,?)";
     }
-    
+
+    public static String deleteFromCheckOutWithUserName() {
+        return "DELETE FROM CheckOut AS C WHERE C.userName = ? ";
+    }
+
+    public static String deleteFromCheckOutWithUserISBN() {
+        return "DELETE FROM CheckOut AS C WHERE C.userName = ?  AND C.ISBN = ?";
+    }
+
+    public static String getBooks() {
+        return "SELECT * FROM Book AS B WHERE B.ISBN IN (SELECT ISBN FROM CheckOut AS C WHERE C.userName = ? )";
+    }
+
+    public static String deleteOrder() {
+        return "DELETE FROM Orders WHERE orderId = ?";
+    }
+
     public static String insertOrder() {
         return "INSERT INTO Orders (ISBN,noOfCopies) VALUES(?,?)";
     }
 
-    public static String deleteCheckOut(String userName, String ISBN) {
-        return "DELETE FROM CheckOut AS C WHERE C.userName = " + userName + " AND C.ISBN = " + ISBN;
-    }
-
-    public static String deleteBook(String ISBN) {
-        return "DELETE FROM Book AS B WHERE B.ISBN = " + ISBN;
+    public static String deleteBook() {
+        return "DELETE FROM Book AS B WHERE B.ISBN = ? ";
     }
 
     public static String UPDATE_USER_SETTINGS() {
@@ -90,8 +117,8 @@ public class Commands {
         return "SELECT * FROM BOOK WHERE ISBN = ?";
     }
 
-    public static String GET_PRODUCTS_BY_CATEGORY(){
-        return "SELECT * FROM BOOK where categoryName = ?" ;
+    public static String GET_PRODUCTS_BY_CATEGORY() {
+        return "SELECT * FROM BOOK where categoryName = ?";
     }
 
     public static String GET_ALL_PRODUCTS() {
