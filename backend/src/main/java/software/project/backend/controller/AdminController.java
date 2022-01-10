@@ -33,10 +33,10 @@ public class AdminController {
         if (service.UpdateProduct(seesionID,productID,temp)) return new ResponseEntity<>(true, HttpStatus.OK);
         return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
     }
-    @DeleteMapping ("/{productID}/{ID}")
+    @DeleteMapping ("/{ID}/{productID}")
     public ResponseEntity<Boolean> deleteProduct(@PathVariable("productID") String temp,
                                                  @PathVariable("ID") String seesionID){
-        System.out.println(temp);
+        System.out.println("delete"+temp);
         if(service.deleteProduct(seesionID,temp)) return new ResponseEntity<>(true, HttpStatus.ACCEPTED);
         return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
     }

@@ -14,7 +14,7 @@
                 </div>
                 <div class="product-line-price">{{product.price}}</div>
                 <div class="product-removal">
-                <button class="remove-product">
+                <button class="remove-product" @click="deleteFromCart(product)">
                     Remove
                 </button>
                 </div>
