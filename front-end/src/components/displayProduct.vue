@@ -66,7 +66,10 @@ export default {
             {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(this.product)
+                body: JSON.stringify({
+                    isbn:this.product.isbn,
+                    noOfCopies:this.product.noOfCopies
+                })
             });
             alert('The book is added to cart');
         },
