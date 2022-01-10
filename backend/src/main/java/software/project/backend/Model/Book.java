@@ -1,27 +1,23 @@
 package software.project.backend.Model;
 
-import java.sql.Blob;
-import java.util.ArrayList;
-
-
 
 public class Book implements Imodel{
-    private String ISBN;
+    private String isbn;
     private String title;
     private int noOfCopies;
-    private int categoryId;
     private double price;
     private String image;
     private String publicationYear;
     private int threshold;
-    private int publisherId ;
+    private String publisherName;
+    private String categoryName;
 
-    public String getISBN() {
-        return ISBN;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getTitle() {
@@ -38,14 +34,6 @@ public class Book implements Imodel{
 
     public void setNoOfCopies(int noOfCopies) {
         this.noOfCopies = noOfCopies;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
     }
 
     public double getPrice() {
@@ -80,11 +68,19 @@ public class Book implements Imodel{
         this.threshold = threshold;
     }
 
-    public int getPublisherId() {
-        return publisherId;
+    public String getPublisherName() {
+        return publisherName;
     }
 
-    public void setPublisherId(int publisherId) {
-        this.publisherId = publisherId;
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

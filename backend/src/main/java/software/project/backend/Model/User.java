@@ -1,7 +1,6 @@
 package software.project.backend.Model;
 
 public class User implements Imodel{
-	private int userId;
 	private String userName;
 	private String firstName;
 	private String lastName;
@@ -15,14 +14,6 @@ public class User implements Imodel{
 		
 	}
 	
-	
-	public int getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(int i) {
-		this.userId = i;
-	}
 
 
 	public String getFirstName() {

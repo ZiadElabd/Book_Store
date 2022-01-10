@@ -18,7 +18,7 @@ public class BookDAO {
 	public boolean insertProduct(Book p) {
 
 		int result = jdbcTemplate.update(Commands.INSERT_PRODUCT(),
-				p.getISBN(),
+				p.getIsbn(),
 				p.getTitle(),
 				p.getNoOfCopies(),
 				p.getPrice() ,
@@ -38,7 +38,7 @@ public class BookDAO {
 	public boolean updateProduct(Book p, int productId) {
 
 		int result = jdbcTemplate.update(Commands.UPDATE_PRODUCT(),
-				p.getISBN(),
+				p.getIsbn(),
 				p.getTitle(),
 				p.getNoOfCopies(),
 				p.getPrice() ,
