@@ -12,12 +12,12 @@
 
                     
                     <div class="price">
-                        <div>ISBN: {{product.isbn}}$</div>     
+                        <div>ISBN: {{product.isbn}}</div>     
                         <div>no.of Copies: {{product.noOfCopies}}</div>
                         <div>Price: {{product.price}}$</div>   
-                        <div>Category Name: {{product.categoryName}}$</div>  
-                         <div>Publisher: {{product.publisherName}}$</div> 
-                         <div>Publication Year: {{product.publicationYear}}$</div> 
+                        <div>Category Name: {{product.categoryName}}</div>  
+                         <div>Publisher: {{product.publisherName}}</div> 
+                         <div>Publication Year: {{product.publicationYear}}</div> 
                     </div>
                     <br>
                     <button type="button" class="btn btn-primary" v-if="! isAdded" @click.prevent="addToCart">ADD TO CART</button>
@@ -72,7 +72,7 @@ export default {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     isbn: this.product.isbn,
-                    noOfCopies: this.product.noOfCopies
+                    noOfCopies: 1
                 })
             });
             alert('The book is added to cart');
