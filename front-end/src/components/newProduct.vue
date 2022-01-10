@@ -64,6 +64,15 @@
                       v-model="product.threshold"
                     />
                   </div>
+                  <div class="mb-3">
+                    <label for="publisherName" class="form-label">publisher Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="publisherName"
+                      v-model="product.publisherName"
+                    />
+                  </div>
                    <div class="mb-3">
                     <label for="no.of Copies" class="form-label">no.of Copies</label>
                     <input
